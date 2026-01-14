@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INSIGHT RECKONING</title>
+    <title>Scholarly Erudition Hub</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
     <style>
         :root {
             --neon-blue: #00d4ff;
             --neon-pink: #ff007f;
-            --glass-bg: rgba(15, 23, 42, 0.8);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-bg: rgba(10, 15, 28, 0.85);
+            --glass-border: rgba(0, 212, 255, 0.2);
         }
 
         body { 
@@ -21,184 +21,206 @@
             margin: 0; 
             padding: 0;
             color: white;
-            /* NEON CITY BACKGROUND */
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
                         url('https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
         }
 
+        /* NEW: Top Navigation Menu */
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-links button {
+            background: transparent;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            margin-left: 10px;
+        }
+
+        .nav-links button:hover {
+            background: var(--neon-blue);
+            color: black;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
         header { 
-            padding: 100px 20px 60px; 
+            padding: 80px 20px 40px; 
             text-align: center;
         }
 
         header h1 { 
-            margin: 0; 
+            font-family: 'Space Mono', monospace;
             font-size: 3rem; 
             text-transform: uppercase;
-            letter-spacing: 4px;
-            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
+            letter-spacing: 5px;
+            text-shadow: 0 0 15px var(--neon-blue);
+            margin: 0;
         }
 
-        header p { 
-            color: var(--neon-blue); 
-            font-weight: 600; 
-            letter-spacing: 1px;
-            margin-top: 10px;
-        }
+        header p { color: var(--neon-pink); font-weight: bold; margin-top: 10px; }
 
         .container { max-width: 1100px; margin: 0 auto 100px; padding: 0 20px; }
 
-        /* Glassmorphism Search Bar */
         .search-container {
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            padding: 5px 20px;
+            padding: 10px 25px;
             border-radius: 50px;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             display: flex;
             align-items: center;
             border: 1px solid var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
         }
 
         input#searchBar { 
             width: 100%; 
-            padding: 15px; 
-            font-size: 16px; 
+            padding: 12px; 
+            background: transparent; 
             border: none; 
-            outline: none;
-            background: transparent;
-            color: white;
+            outline: none; 
+            color: white; 
+            font-size: 1rem;
         }
 
-        /* Cyber Cards */
+        /* Cyber Card Grid */
         .notes-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-            gap: 30px; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 25px; 
         }
 
         .note-card { 
             background: var(--glass-bg); 
-            backdrop-filter: blur(12px);
-            padding: 40px 30px; 
-            border-radius: 24px; 
+            backdrop-filter: blur(10px);
+            padding: 30px; 
+            border-radius: 15px; 
             border: 1px solid var(--glass-border);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.3s;
             display: flex;
             flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .note-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+            border-left: 5px solid var(--neon-blue);
         }
 
         .note-card:hover { 
-            transform: scale(1.05);
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+            transform: translateY(-5px);
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
         }
 
-        .note-icon {
-            font-size: 2.5rem;
-            color: var(--neon-blue);
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px var(--neon-blue);
-        }
+        .note-icon { font-size: 2rem; color: var(--neon-blue); margin-bottom: 15px; }
 
-        .category-tag {
-            font-size: 0.75rem;
-            color: var(--neon-pink);
-            font-weight: 800;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .note-title { 
-            font-weight: 700; 
-            font-size: 1.3rem;
-            margin-bottom: 25px;
-            line-height: 1.4;
-        }
+        .note-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 20px; height: 50px; overflow: hidden; }
 
         .btn {
             text-align: center;
-            padding: 14px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 5px;
             text-decoration: none;
-            font-weight: 700;
-            background: transparent;
-            color: white;
+            font-weight: bold;
             border: 1px solid var(--neon-blue);
-            box-shadow: inset 0 0 10px rgba(0, 212, 255, 0.2);
+            color: var(--neon-blue);
             transition: 0.3s;
         }
 
-        .btn:hover { 
-            background: var(--neon-blue); 
-            color: #000;
-            box-shadow: 0 0 20px var(--neon-blue);
-        }
+        .btn:hover { background: var(--neon-blue); color: black; }
 
-        footer { text-align: center; padding: 50px; opacity: 0.6; font-size: 0.8rem; }
+        footer { text-align: center; padding: 40px; opacity: 0.5; font-family: 'Space Mono'; }
     </style>
 </head>
 <body>
 
+    <nav>
+        <div class="nav-container">
+            <div style="font-family: 'Space Mono'; color: var(--neon-blue);">[SYSTEM_V1.0]</div>
+            <div class="nav-links">
+                <button onclick="filterAll()">VIEW_ALL</button>
+                <button onclick="location.reload()">RESET_TERMINAL</button>
+            </div>
+        </div>
+    </nav>
+
     <header>
-        <h1>ERUDITION DUNGEON</h1>
-        <p>// EMMANUEL KING TERMINAL</p>
+        <h1>ERUDITION HUB</h1>
+        <p>// ACCESSING ARCHIVAL_DATA_STREAM</p>
     </header>
 
     <div class="container">
         <div class="search-container">
-            <i class="fa-solid fa-terminal" style="color: var(--neon-blue);"></i>
-            <input type="text" id="searchBar" onkeyup="filterNotes()" placeholder="Query library database...">
+            <i class="fa-solid fa-search" style="color: var(--neon-blue);"></i>
+            <input type="text" id="searchBar" onkeyup="filterSearch()" placeholder="Search library...">
         </div>
 
         <div class="notes-grid" id="notesList">
-            <div class="note-card">
-                <div class="note-icon"><i class="fa-solid fa-flask"></i></div>
-                <span class="category-tag">DATA_SCIENCE</span>
+            
+            <div class="note-card" data-type="pdf">
+                <div class="note-icon"><i class="fa-solid fa-flask-vial"></i></div>
                 <div class="note-title">Chemistry Lab Model 1-1</div>
-                <a href="chemistry lab model 1-1.pdf" target="_blank" class="btn">ACCESS_FILE</a>
+                <a href="chemistry lab model 1-1.pdf" target="_blank" class="btn">FETCH_DATA</a>
             </div>
 
-            <div class="note-card">
-                <div class="note-icon"><i class="fa-solid fa-fingerprint"></i></div>
-                <span class="category-tag">ENTRY_PERMISSION</span>
-                <div class="note-title">ADM Letter for TVET</div>
-                <a href="ADM LETTER FOR TVET.pdf" target="_blank" class="btn">ACCESS_FILE</a>
-            </div>
-
-            <div class="note-card">
-                <div class="note-icon"><i class="fa-solid fa-microchip"></i></div>
-                <span class="category-tag">PROTOCOLS</span>
+            <div class="note-card" data-type="pdf">
+                <div class="note-icon"><i class="fa-solid fa-file-contract"></i></div>
                 <div class="note-title">Industrial Attachment Form</div>
-                <a href="4. Industrial-Attachment-Form.pdf" target="_blank" class="btn">ACCESS_FILE</a>
+                <a href="4. Industrial-Attachment-Form.pdf" target="_blank" class="btn">FETCH_DATA</a>
             </div>
-        </div>
+
+            <div class="note-card" data-type="pdf">
+                <div class="note-icon"><i class="fa-solid fa-id-card"></i></div>
+                <div class="note-title">Admission Letter TVET</div>
+                <a href="ADM LETTER FOR TVET.pdf" target="_blank" class="btn">FETCH_DATA</a>
+            </div>
+
+            <div class="note-card" data-type="pdf">
+                <div class="note-icon"><i class="fa-solid fa-coins"></i></div>
+                <div class="note-title">Bursary Form Revised</div>
+                <a href="Bursary-form-Revised.pdf" target="_blank" class="btn">FETCH_DATA</a>
+            </div>
+
+            </div>
     </div>
 
     <footer>
-        <p>SYSTEM STATUS: OPERATIONAL | &copy; CONTACT US AT +254790608521</p>
+        &copy; 2026 ODDESSY OF KING // ALL_RIGHTS_RESERVED
     </footer>
 
     <script>
-        function filterNotes() {
+        function filterSearch() {
             let input = document.getElementById('searchBar').value.toUpperCase();
             let cards = document.getElementsByClassName('note-card');
             for (let i = 0; i < cards.length; i++) {
-                let content = cards[i].innerText.toUpperCase();
-                cards[i].style.display = content.includes(input) ? "flex" : "none";
+                let txt = cards[i].innerText.toUpperCase();
+                cards[i].style.display = txt.includes(input) ? "flex" : "none";
+            }
+        }
+
+        function filterAll() {
+            document.getElementById('searchBar').value = '';
+            let cards = document.getElementsByClassName('note-card');
+            for (let i = 0; i < cards.length; i++) {
+                cards[i].style.display = "flex";
             }
         }
     </script>
