@@ -3,67 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes Library</title>
+    <title>Student Notes & Forms</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
-        header { text-align: center; padding: 40px 0; border-bottom: 2px solid #ddd; margin-bottom: 20px; }
-        h1 { margin: 0; color: #2c3e50; }
-        input#searchBar { width: 100%; padding: 15px; font-size: 16px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; padding: 30px 0; background: #2c3e50; color: white; border-radius: 10px; margin-bottom: 25px; }
+        input#searchBar { width: 100%; padding: 15px; font-size: 16px; border: 2px solid #ddd; border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; }
         
-        .category-title { font-size: 1.2em; color: #555; margin-top: 30px; border-left: 4px solid #3498db; padding-left: 10px; }
-        
-        .note-card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.2s; display: flex; justify-content: space-between; align-items: center; }
-        .note-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .note-link { text-decoration: none; color: #2c3e50; font-weight: bold; font-size: 1.1em; flex-grow: 1; }
-        .download-btn { background-color: #3498db; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 0.9em; }
-        .download-btn:hover { background-color: #2980b9; }
-
-        /* Mobile Responsive */
-        @media (max-width: 600px) { .note-card { flex-direction: column; align-items: flex-start; } .download-btn { margin-top: 10px; } }
+        .note-card { background: white; padding: 15px; margin-bottom: 12px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .note-info { flex-grow: 1; }
+        .note-title { font-weight: bold; color: #2980b9; text-decoration: none; font-size: 1.1em; }
+        .file-type { font-size: 0.8em; color: #888; display: block; }
+        .view-btn { background-color: #27ae60; color: white; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        .view-btn:hover { background-color: #219150; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>📚 Public Notes Repository</h1>
-        <p>Search below to find documents and study materials.</p>
+        <h1>Student Resource Portal</h1>
+        <p>Access your forms, letters, and chemistry notes below.</p>
     </header>
 
-    <input type="text" id="searchBar" onkeyup="filterNotes()" placeholder="Type to search for notes...">
+    <input type="text" id="searchBar" onkeyup="filterNotes()" placeholder="Search for a form or note (e.g., 'Chemistry', 'Bursary', 'Letter')...">
 
-    <div class="category-section">
-        <h2 class="category-title">Mathematics & Science</h2>
-        
+    <div id="notesList">
         <div class="note-card">
-            <a href="lecture-1-algebra.pdf" class="note-link">Algebra Basics (Lecture 1)</a>
-            <a href="lecture-1-algebra.pdf" class="download-btn" target="_blank">View</a>
+            <div class="note-info">
+                <a href="chemistry lab model 1-1.pdf" class="note-title">Chemistry Lab Model 1-1</a>
+                <span class="file-type">PDF Document</span>
+            </div>
+            <a href="chemistry lab model 1-1.pdf" target="_blank" class="view-btn">Open PDF</a>
         </div>
 
         <div class="note-card">
-            <a href="physics-formulas.pdf" class="note-link">Physics Formula Sheet</a>
-            <a href="physics-formulas.pdf" class="download-btn" target="_blank">View</a>
+            <div class="note-info">
+                <a href="4. Industrial-Attachment-Form.pdf" class="note-title">4. Industrial Attachment Form</a>
+                <span class="file-type">PDF Document</span>
+            </div>
+            <a href="4. Industrial-Attachment-Form.pdf" target="_blank" class="view-btn">Open PDF</a>
         </div>
-    </div>
 
-    <div class="category-section">
-        <h2 class="category-title">History & Literature</h2>
-        
         <div class="note-card">
-            <a href="CLEARANCE-FORM.pdf" class="note-link">World War II Summary</a>
-            <a href="Chancellors-Scholarship-application-Form.pdf" class="download-btn" target="_blank">View</a>
+            <div class="note-info">
+                <a href="5. Internship-Form-3.pdf" class="note-title">5. Internship Form-3</a>
+                <span class="file-type">PDF Document</span>
+            </div>
+            <a href="5. Internship-Form-3.pdf" target="_blank" class="view-btn">Open PDF</a>
+        </div>
+
+        <div class="note-card">
+            <div class="note-info">
+                <a href="ADM LETTER FOR TVET.pdf" class="note-title">ADM Letter for TVET</a>
+                <span class="file-type">PDF Document</span>
+            </div>
+            <a href="ADM LETTER FOR TVET.pdf" target="_blank" class="view-btn">Open PDF</a>
+        </div>
+
+        <div class="note-card">
+            <div class="note-info">
+                <a href="ADMMISSION_LETER_PDF[1].pdf" class="note-title">Admission Letter (Official)</a>
+                <span class="file-type">PDF Document</span>
+            </div>
+            <a href="ADMMISSION_LETER_PDF[1].pdf" target="_blank" class="view-btn">Open PDF</a>
+        </div>
+
+        <div class="note-card">
+            <div class="note-info">
+                <a href="Fee Structure Bachelor of Education Arts.pdf" class="note-title">Fee Structure - B.Ed Arts</a>
+                <span class="file-type">PDF Document</span>
+            </div>
+            <a href="Fee Structure Bachelor of Education Arts.pdf" target="_blank" class="view-btn">Open PDF</a>
+        </div>
+
+        <div class="note-card">
+            <div class="note-info">
+                <a href="Bursary-form-Revised.pdf" class="note-title">Bursary Form (Revised)</a>
+                <span class="file-type">PDF Document</span>
+            </div>
+            <a href="Bursary-form-Revised.pdf" target="_blank" class="view-btn">Open PDF</a>
+        </div>
+
+        <div class="note-card">
+            <div class="note-info">
+                <a href="CLEARANCE FORM.pdf" class="note-title">Clearance Form</a>
+                <span class="file-type">PDF Document</span>
+            </div>
+            <a href="CLEARANCE FORM.pdf" target="_blank" class="view-btn">Open PDF</a>
+        </div>
+
+        <div class="note-card">
+            <div class="note-info">
+                <a href="Alumni-Registration-form.pdf" class="note-title">Alumni Registration Form</a>
+                <span class="file-type">PDF Document</span>
+            </div>
+            <a href="Alumni-Registration-form.pdf" target="_blank" class="view-btn">Open PDF</a>
         </div>
     </div>
 
     <script>
         function filterNotes() {
-            var input = document.getElementById('searchBar');
-            var filter = input.value.toUpperCase();
-            var cards = document.getElementsByClassName('note-card');
-
-            for (i = 0; i < cards.length; i++) {
-                var a = cards[i].getElementsByTagName("a")[0];
-                var txtValue = a.textContent || a.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            let input = document.getElementById('searchBar').value.toUpperCase();
+            let cards = document.getElementsByClassName('note-card');
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].querySelector(".note-title").innerText;
+                if (title.toUpperCase().indexOf(input) > -1) {
                     cards[i].style.display = "";
                 } else {
                     cards[i].style.display = "none";
@@ -71,6 +114,6 @@
             }
         }
     </script>
-
 </body>
 </html>
+
