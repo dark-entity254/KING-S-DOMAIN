@@ -3,100 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Notes & Forms</title>
+    <title>Student Resource Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
-        header { text-align: center; padding: 30px 0; background: #2c3e50; color: white; border-radius: 10px; margin-bottom: 25px; }
-        input#searchBar { width: 100%; padding: 15px; font-size: 16px; border: 2px solid #ddd; border-radius: 8px; margin-bottom: 20px; box-sizing: border-box; }
-        
-        .note-card { background: white; padding: 15px; margin-bottom: 12px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
-        .note-info { flex-grow: 1; }
-        .note-title { font-weight: bold; color: #2980b9; text-decoration: none; font-size: 1.1em; }
-        .file-type { font-size: 0.8em; color: #888; display: block; }
-        .view-btn { background-color: #27ae60; color: white; padding: 8px 16px; border-radius: 5px; text-decoration: none; font-weight: bold; }
-        .view-btn:hover { background-color: #219150; }
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: #1e293b; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        /* Hero Section */
+        header { 
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white; 
+            padding: 60px 20px; 
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 { margin: 0; font-size: 2.5rem; letter-spacing: -1px; }
+        header p { opacity: 0.9; font-weight: 300; margin-top: 10px; }
+
+        .container { max-width: 1100px; margin: -30px auto 50px; padding: 0 20px; }
+
+        /* Search Bar Area */
+        .search-container {
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        input#searchBar { 
+            width: 100%; 
+            padding: 15px 20px; 
+            font-size: 16px; 
+            border: none; 
+            outline: none;
+            border-radius: 8px;
+        }
+
+        /* Grid Layout */
+        .notes-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            gap: 20px; 
+        }
+
+        /* Note Card Design */
+        .note-card { 
+            background: var(--card-bg); 
+            padding: 24px; 
+            border-radius: 16px; 
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .note-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .category-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--primary);
+            background: #dbeafe;
+            padding: 4px 8px;
+            border-radius: 4px;
+            width: fit-content;
+            margin-bottom: 12px;
+        }
+
+        .note-title { 
+            font-weight: 600; 
+            color: #0f172a; 
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .btn-view { background: var(--primary); color: white; }
+        .btn-view:hover { background: #1d4ed8; }
+
+        .btn-doc { background: #f1f5f9; color: #475569; }
+        .btn-doc:hover { background: #e2e8f0; }
+
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Student Resource Portal</h1>
-        <p>Access your forms, letters, and chemistry notes below.</p>
+        <h1>Resource Library</h1>
+        <p>Download admission letters, forms, and revision notes instantly.</p>
     </header>
 
-    <input type="text" id="searchBar" onkeyup="filterNotes()" placeholder="Search for a form or note (e.g., 'Chemistry', 'Bursary', 'Letter')...">
-
-    <div id="notesList">
-        <div class="note-card">
-            <div class="note-info">
-                <a href="chemistry lab model 1-1.pdf" class="note-title">Chemistry Lab Model 1-1</a>
-                <span class="file-type">PDF Document</span>
-            </div>
-            <a href="chemistry lab model 1-1.pdf" target="_blank" class="view-btn">Open PDF</a>
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="searchBar" onkeyup="filterNotes()" placeholder="Search by name or category...">
         </div>
 
-        <div class="note-card">
-            <div class="note-info">
-                <a href="4. Industrial-Attachment-Form.pdf" class="note-title">4. Industrial Attachment Form</a>
-                <span class="file-type">PDF Document</span>
+        <div class="notes-grid" id="notesList">
+            
+            <div class="note-card">
+                <span class="category-tag">Revision</span>
+                <div class="note-title">Chemistry Lab Model 1-1</div>
+                <div class="actions">
+                    <a href="chemistry lab model 1-1.pdf" target="_blank" class="btn btn-view">View PDF</a>
+                </div>
             </div>
-            <a href="4. Industrial-Attachment-Form.pdf" target="_blank" class="view-btn">Open PDF</a>
-        </div>
 
-        <div class="note-card">
-            <div class="note-info">
-                <a href="5. Internship-Form-3.pdf" class="note-title">5. Internship Form-3</a>
-                <span class="file-type">PDF Document</span>
+            <div class="note-card">
+                <span class="category-tag">Admission</span>
+                <div class="note-title">Admission Letter (TVET Official)</div>
+                <div class="actions">
+                    <a href="ADM LETTER FOR TVET.pdf" target="_blank" class="btn btn-view">View PDF</a>
+                </div>
             </div>
-            <a href="5. Internship-Form-3.pdf" target="_blank" class="view-btn">Open PDF</a>
-        </div>
 
-        <div class="note-card">
-            <div class="note-info">
-                <a href="ADM LETTER FOR TVET.pdf" class="note-title">ADM Letter for TVET</a>
-                <span class="file-type">PDF Document</span>
+            <div class="note-card">
+                <span class="category-tag">Forms</span>
+                <div class="note-title">Industrial Attachment Form</div>
+                <div class="actions">
+                    <a href="4. Industrial-Attachment-Form.pdf" target="_blank" class="btn btn-view">View PDF</a>
+                </div>
             </div>
-            <a href="ADM LETTER FOR TVET.pdf" target="_blank" class="view-btn">Open PDF</a>
-        </div>
 
-        <div class="note-card">
-            <div class="note-info">
-                <a href="ADMMISSION_LETER_PDF[1].pdf" class="note-title">Admission Letter (Official)</a>
-                <span class="file-type">PDF Document</span>
+            <div class="note-card">
+                <span class="category-tag">Finances</span>
+                <div class="note-title">Bursary Form (Revised Version)</div>
+                <div class="actions">
+                    <a href="Bursary-form-Revised.pdf" target="_blank" class="btn btn-view">View PDF</a>
+                </div>
             </div>
-            <a href="ADMMISSION_LETER_PDF[1].pdf" target="_blank" class="view-btn">Open PDF</a>
-        </div>
 
-        <div class="note-card">
-            <div class="note-info">
-                <a href="Fee Structure Bachelor of Education Arts.pdf" class="note-title">Fee Structure - B.Ed Arts</a>
-                <span class="file-type">PDF Document</span>
+            <div class="note-card">
+                <span class="category-tag">Forms</span>
+                <div class="note-title">Student Clearance Form</div>
+                <div class="actions">
+                    <a href="CLEARANCE FORM.pdf" target="_blank" class="btn btn-view">View PDF</a>
+                </div>
             </div>
-            <a href="Fee Structure Bachelor of Education Arts.pdf" target="_blank" class="view-btn">Open PDF</a>
-        </div>
 
-        <div class="note-card">
-            <div class="note-info">
-                <a href="Bursary-form-Revised.pdf" class="note-title">Bursary Form (Revised)</a>
-                <span class="file-type">PDF Document</span>
+             <div class="note-card">
+                <span class="category-tag">Academic</span>
+                <div class="note-title">3rd Year TP Questionnaire 2024</div>
+                <div class="actions">
+                    <a href="3rd year TP Questionnair 2024.docx" class="btn btn-doc">Download Word</a>
+                </div>
             </div>
-            <a href="Bursary-form-Revised.pdf" target="_blank" class="view-btn">Open PDF</a>
-        </div>
 
-        <div class="note-card">
-            <div class="note-info">
-                <a href="CLEARANCE FORM.pdf" class="note-title">Clearance Form</a>
-                <span class="file-type">PDF Document</span>
-            </div>
-            <a href="CLEARANCE FORM.pdf" target="_blank" class="view-btn">Open PDF</a>
-        </div>
-
-        <div class="note-card">
-            <div class="note-info">
-                <a href="Alumni-Registration-form.pdf" class="note-title">Alumni Registration Form</a>
-                <span class="file-type">PDF Document</span>
-            </div>
-            <a href="Alumni-Registration-form.pdf" target="_blank" class="view-btn">Open PDF</a>
         </div>
     </div>
 
@@ -106,8 +194,9 @@
             let cards = document.getElementsByClassName('note-card');
             for (let i = 0; i < cards.length; i++) {
                 let title = cards[i].querySelector(".note-title").innerText;
-                if (title.toUpperCase().indexOf(input) > -1) {
-                    cards[i].style.display = "";
+                let tag = cards[i].querySelector(".category-tag").innerText;
+                if (title.toUpperCase().indexOf(input) > -1 || tag.toUpperCase().indexOf(input) > -1) {
+                    cards[i].style.display = "flex";
                 } else {
                     cards[i].style.display = "none";
                 }
@@ -116,4 +205,3 @@
     </script>
 </body>
 </html>
-
