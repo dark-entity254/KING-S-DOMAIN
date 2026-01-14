@@ -12,92 +12,43 @@
         :root {
             --neon-blue: #00d4ff;
             --neon-pink: #ff007f;
-            --glass-bg: rgba(10, 15, 28, 0.85);
-            --glass-border: rgba(0, 212, 255, 0.2);
+            --glass-bg: rgba(10, 15, 28, 0.9);
+            --glass-border: rgba(0, 212, 255, 0.3);
+            --card-hover: rgba(0, 212, 255, 0.1);
         }
 
         body { 
             font-family: 'Inter', sans-serif; 
             margin: 0; 
-            padding: 0;
             color: white;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
                         url('https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
         }
 
-        /* NEW: Top Navigation Menu */
-        nav {
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--neon-blue);
-        }
+        header { padding: 60px 20px 40px; text-align: center; }
+        header h1 { font-family: 'Space Mono', monospace; font-size: 3rem; text-shadow: 0 0 15px var(--neon-blue); margin: 0; }
+        header p { color: var(--neon-pink); font-family: 'Space Mono'; margin-top: 10px; font-size: 0.9rem; }
 
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
 
-        .nav-links button {
-            background: transparent;
-            border: 1px solid var(--neon-blue);
-            color: var(--neon-blue);
-            padding: 8px 15px;
-            cursor: pointer;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.8rem;
-            transition: 0.3s;
-            margin-left: 10px;
-        }
-
-        .nav-links button:hover {
-            background: var(--neon-blue);
-            color: black;
-            box-shadow: 0 0 15px var(--neon-blue);
-        }
-
-        header { 
-            padding: 80px 20px 40px; 
-            text-align: center;
-        }
-
-        header h1 { 
-            font-family: 'Space Mono', monospace;
-            font-size: 3rem; 
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            text-shadow: 0 0 15px var(--neon-blue);
-            margin: 0;
-        }
-
-        header p { color: var(--neon-pink); font-weight: bold; margin-top: 10px; }
-
-        .container { max-width: 1100px; margin: 0 auto 100px; padding: 0 20px; }
-
-        .search-container {
+        /* Search Section */
+        .search-area {
             background: var(--glass-bg);
-            padding: 10px 25px;
+            border: 1px solid var(--neon-blue);
             border-radius: 50px;
-            margin-bottom: 40px;
+            padding: 5px 25px;
+            margin-bottom: 50px;
             display: flex;
             align-items: center;
-            border: 1px solid var(--neon-blue);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.1);
         }
 
         input#searchBar { 
             width: 100%; 
-            padding: 12px; 
+            padding: 15px; 
             background: transparent; 
             border: none; 
             outline: none; 
@@ -105,122 +56,150 @@
             font-size: 1rem;
         }
 
-        /* Cyber Card Grid */
+        /* The Grid */
         .notes-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
             gap: 25px; 
         }
 
+        /* The File Card */
         .note-card { 
             background: var(--glass-bg); 
             backdrop-filter: blur(10px);
             padding: 30px; 
-            border-radius: 15px; 
+            border-radius: 20px; 
             border: 1px solid var(--glass-border);
-            transition: 0.3s;
             display: flex;
             flex-direction: column;
-            border-left: 5px solid var(--neon-blue);
+            justify-content: space-between;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .note-card:hover { 
+        .note-card:hover {
             transform: translateY(-5px);
             border-color: var(--neon-pink);
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.2);
+            background: var(--card-hover);
         }
 
-        .note-icon { font-size: 2rem; color: var(--neon-blue); margin-bottom: 15px; }
+        .file-icon { font-size: 2.5rem; color: var(--neon-blue); margin-bottom: 20px; }
+        
+        .file-info { margin-bottom: 25px; }
+        .file-name { font-weight: 700; font-size: 1.1rem; line-height: 1.4; color: #fff; }
+        .file-meta { font-family: 'Space Mono'; font-size: 0.7rem; color: var(--neon-blue); text-transform: uppercase; margin-top: 5px; display: block;}
 
-        .note-title { font-weight: 600; font-size: 1.1rem; margin-bottom: 20px; height: 50px; overflow: hidden; }
-
-        .btn {
-            text-align: center;
-            padding: 12px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            border: 1px solid var(--neon-blue);
+        /* Individual Download Button */
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: transparent;
             color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
             transition: 0.3s;
         }
 
-        .btn:hover { background: var(--neon-blue); color: black; }
+        .download-btn:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
 
-        footer { text-align: center; padding: 40px; opacity: 0.5; font-family: 'Space Mono'; }
+        .download-btn i { font-size: 1rem; }
+
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="nav-container">
-            <div style="font-family: 'Space Mono'; color: var(--neon-blue);">[SYSTEM_V1.0]</div>
-            <div class="nav-links">
-                <button onclick="filterAll()">VIEW_ALL</button>
-                <button onclick="location.reload()">RESET_TERMINAL</button>
-            </div>
-        </div>
-    </nav>
-
     <header>
         <h1>ERUDITION HUB</h1>
-        <p>// ACCESSING ARCHIVAL_DATA_STREAM</p>
+        <p>// DATA_REPOSITORY_V2.0 // STATUS: ONLINE</p>
     </header>
 
     <div class="container">
-        <div class="search-container">
-            <i class="fa-solid fa-search" style="color: var(--neon-blue);"></i>
-            <input type="text" id="searchBar" onkeyup="filterSearch()" placeholder="Search library...">
+        
+        <div class="search-area">
+            <i class="fa-solid fa-terminal" style="color: var(--neon-blue);"></i>
+            <input type="text" id="searchBar" onkeyup="filterFiles()" placeholder="Search library database...">
         </div>
 
         <div class="notes-grid" id="notesList">
             
-            <div class="note-card" data-type="pdf">
-                <div class="note-icon"><i class="fa-solid fa-flask-vial"></i></div>
-                <div class="note-title">Chemistry Lab Model 1-1</div>
-                <a href="chemistry lab model 1-1.pdf" target="_blank" class="btn">FETCH_DATA</a>
+            <div class="note-card">
+                <div class="file-info">
+                    <i class="fa-solid fa-file-pdf file-icon"></i>
+                    <span class="file-name">Chemistry Lab Model 1-1</span>
+                    <span class="file-meta">Type: PDF // Secure</span>
+                </div>
+                <a href="chemistry lab model 1-1.pdf" download class="download-btn">
+                    <i class="fa-solid fa-download"></i> DOWNLOAD_FILE
+                </a>
             </div>
 
-            <div class="note-card" data-type="pdf">
-                <div class="note-icon"><i class="fa-solid fa-file-contract"></i></div>
-                <div class="note-title">Industrial Attachment Form</div>
-                <a href="4. Industrial-Attachment-Form.pdf" target="_blank" class="btn">FETCH_DATA</a>
+            <div class="note-card">
+                <div class="file-info">
+                    <i class="fa-solid fa-file-pdf file-icon"></i>
+                    <span class="file-name">Industrial Attachment Form</span>
+                    <span class="file-meta">Type: PDF // Official</span>
+                </div>
+                <a href="4. Industrial-Attachment-Form.pdf" download class="download-btn">
+                    <i class="fa-solid fa-download"></i> DOWNLOAD_FILE
+                </a>
             </div>
 
-            <div class="note-card" data-type="pdf">
-                <div class="note-icon"><i class="fa-solid fa-id-card"></i></div>
-                <div class="note-title">Admission Letter TVET</div>
-                <a href="ADM LETTER FOR TVET.pdf" target="_blank" class="btn">FETCH_DATA</a>
+            <div class="note-card">
+                <div class="file-info">
+                    <i class="fa-solid fa-file-signature file-icon"></i>
+                    <span class="file-name">ADM Letter for TVET</span>
+                    <span class="file-meta">Type: PDF // Entry</span>
+                </div>
+                <a href="ADM LETTER FOR TVET.pdf" download class="download-btn">
+                    <i class="fa-solid fa-download"></i> DOWNLOAD_FILE
+                </a>
             </div>
 
-            <div class="note-card" data-type="pdf">
-                <div class="note-icon"><i class="fa-solid fa-coins"></i></div>
-                <div class="note-title">Bursary Form Revised</div>
-                <a href="Bursary-form-Revised.pdf" target="_blank" class="btn">FETCH_DATA</a>
+            <div class="note-card">
+                <div class="file-info">
+                    <i class="fa-solid fa-file-invoice-dollar file-icon"></i>
+                    <span class="file-name">Bursary Form Revised</span>
+                    <span class="file-meta">Type: PDF // Financial</span>
+                </div>
+                <a href="Bursary-form-Revised.pdf" download class="download-btn">
+                    <i class="fa-solid fa-download"></i> DOWNLOAD_FILE
+                </a>
+            </div>
+
+            <div class="note-card">
+                <div class="file-info">
+                    <i class="fa-solid fa-file-word file-icon" style="color: #2b579a;"></i>
+                    <span class="file-name">3rd Year TP Questionnaire 2024</span>
+                    <span class="file-meta">Type: DOCX // Survey</span>
+                </div>
+                <a href="3rd year TP Questionnair 2024.docx" download class="download-btn">
+                    <i class="fa-solid fa-download"></i> DOWNLOAD_FILE
+                </a>
             </div>
 
             </div>
     </div>
 
-    <footer>
-        &copy; 2026 ODDESSY OF KING // ALL_RIGHTS_RESERVED
-    </footer>
-
     <script>
-        function filterSearch() {
+        function filterFiles() {
             let input = document.getElementById('searchBar').value.toUpperCase();
             let cards = document.getElementsByClassName('note-card');
             for (let i = 0; i < cards.length; i++) {
                 let txt = cards[i].innerText.toUpperCase();
                 cards[i].style.display = txt.includes(input) ? "flex" : "none";
-            }
-        }
-
-        function filterAll() {
-            document.getElementById('searchBar').value = '';
-            let cards = document.getElementsByClassName('note-card');
-            for (let i = 0; i < cards.length; i++) {
-                cards[i].style.display = "flex";
             }
         }
     </script>
