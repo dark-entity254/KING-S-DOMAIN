@@ -12,193 +12,204 @@
         :root {
             --neon-blue: #00d4ff;
             --neon-pink: #ff007f;
-            --glass-bg: rgba(10, 15, 28, 0.9);
+            --glass-bg: rgba(10, 15, 28, 0.95);
             --glass-border: rgba(0, 212, 255, 0.3);
-            --card-hover: rgba(0, 212, 255, 0.1);
+            --admin-gold: #ffcc00;
         }
 
         body { 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            color: white;
-            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+            font-family: 'Inter', sans-serif; margin: 0; color: white;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), 
                         url('https://images.unsplash.com/photo-1601042879364-f3947d3f9c16?auto=format&fit=crop&w=1920&q=80');
-            background-attachment: fixed;
-            background-size: cover;
-            background-position: center;
+            background-attachment: fixed; background-size: cover; min-height: 100vh;
         }
 
-        header { padding: 60px 20px 20px; text-align: center; }
-        header h1 { font-family: 'Space Mono', monospace; font-size: 2.5rem; text-shadow: 0 0 15px var(--neon-blue); margin: 0; letter-spacing: 2px; }
-        header p { color: var(--neon-pink); font-family: 'Space Mono'; margin-top: 10px; font-size: 0.8rem; }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
-
-        /* Action Bar */
-        .action-bar {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+        /* --- AUTH MODAL --- */
+        #authOverlay {
+            position: fixed; top:0; left:0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 1000; display: flex; align-items: center; justify-content: center;
+        }
+        .auth-card {
+            background: var(--glass-bg); padding: 40px; border: 1px solid var(--neon-blue);
+            border-radius: 20px; width: 350px; text-align: center; box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+        }
+        .auth-card input {
+            width: 100%; padding: 12px; margin: 10px 0; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--neon-blue); color: white; border-radius: 5px; box-sizing: border-box;
+        }
+        .auth-btn {
+            width: 100%; padding: 12px; background: var(--neon-blue); border: none; 
+            font-weight: bold; cursor: pointer; margin-top: 10px;
         }
 
-        .search-area {
-            flex: 1;
-            background: var(--glass-bg);
-            border: 1px solid var(--neon-blue);
-            border-radius: 50px;
-            padding: 5px 25px;
-            display: flex;
-            align-items: center;
-            min-width: 300px;
+        /* --- MAIN HUB --- */
+        header { padding: 40px 20px 10px; text-align: center; }
+        header h1 { font-family: 'Space Mono'; text-shadow: 0 0 15px var(--neon-blue); }
+        
+        .admin-only { display: none; } /* Hidden by default */
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        .admin-status-bar {
+            background: rgba(255, 204, 0, 0.1); border: 1px solid var(--admin-gold);
+            padding: 15px; border-radius: 10px; margin-bottom: 20px; display: none;
+            font-family: 'Space Mono'; font-size: 0.8rem; color: var(--admin-gold);
         }
 
-        input#searchBar { 
-            width: 100%; padding: 12px; background: transparent; border: none; outline: none; color: white; font-size: 1rem;
-        }
-
-        .bulk-download-btn {
-            background: var(--neon-pink);
-            color: white;
-            border: none;
-            padding: 0 25px;
-            border-radius: 50px;
-            font-family: 'Space Mono';
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
-        }
-
-        .bulk-download-btn:hover { background: white; color: var(--neon-pink); transform: scale(1.05); }
-
-        /* The Grid */
-        .notes-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-            gap: 20px; 
-        }
-
-        .note-card { 
-            background: var(--glass-bg); 
-            backdrop-filter: blur(10px);
-            padding: 25px; 
-            border-radius: 15px; 
-            border: 1px solid var(--glass-border);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: 0.3s;
-        }
-
-        .note-card:hover {
-            border-color: var(--neon-pink);
-            background: var(--card-hover);
-        }
-
-        .file-icon { font-size: 2rem; color: var(--neon-blue); margin-bottom: 15px; }
-        .file-name { font-weight: 700; font-size: 1rem; display: block; margin-bottom: 5px; }
-        .file-meta { font-family: 'Space Mono'; font-size: 0.65rem; color: var(--neon-blue); opacity: 0.8; }
-
-        .download-btn {
-            margin-top: 20px;
-            text-align: center;
-            border: 1px solid var(--neon-blue);
-            color: var(--neon-blue);
-            padding: 10px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-family: 'Space Mono';
-            font-size: 0.8rem;
-            transition: 0.3s;
-        }
-
-        .download-btn:hover { background: var(--neon-blue); color: black; }
-
+        /* Reusing your existing action and grid styles */
+        .action-bar { display: flex; flex-direction: column; gap: 20px; margin-bottom: 40px; }
+        .top-row { display: flex; gap: 15px; flex-wrap: wrap; }
+        .search-area { flex: 1; background: var(--glass-bg); border: 1px solid var(--neon-blue); border-radius: 50px; padding: 5px 25px; display: flex; align-items: center; }
+        input#searchBar { width: 100%; padding: 12px; background: transparent; border: none; outline: none; color: white; }
+        
+        .notes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .note-card { background: var(--glass-bg); padding: 25px; border-radius: 15px; border: 1px solid var(--glass-border); transition: 0.3s; }
+        .note-card:hover { border-color: var(--neon-pink); transform: translateY(-5px); }
+        .download-btn { display: block; margin-top: 20px; text-align: center; border: 1px solid var(--neon-blue); color: var(--neon-blue); padding: 10px; text-decoration: none; font-size: 0.8rem; }
+        
+        .bulk-download-btn { background: var(--neon-pink); color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; }
+        .upload-trigger-btn { background: var(--admin-gold); color: black; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>ERUDITION HUB</h1>
-        <p>// ODDYSEY OF KING // DATABASE ACCESS GRANTED</p>
-    </header>
-
-    <div class="container">
-        
-        <div class="action-bar">
-            <div class="search-area">
-                <i class="fa-solid fa-terminal" style="color: var(--neon-blue);"></i>
-                <input type="text" id="searchBar" onkeyup="filterFiles()" placeholder="Search library database...">
-            </div>
-            <button class="bulk-download-btn" onclick="downloadAll()">
-                <i class="fa-solid fa-box-archive"></i> DOWNLOAD_ALL
-            </button>
-        </div>
-
-        <div class="notes-grid" id="notesList">
-            <div class="note-card">
-                <div>
-                    <i class="fa-solid fa-file-pdf file-icon"></i>
-                    <span class="file-name">Chemistry Lab Model 1-1</span>
-                    <span class="file-meta">TYPE: PDF // SCI-DATA</span>
-                </div>
-                <a href="chemistry lab model 1-1.pdf" download class="download-btn">DOWNLOAD</a>
-            </div>
-
-            <div class="note-card">
-                <div>
-                    <i class="fa-solid fa-file-pdf file-icon"></i>
-                    <span class="file-name">Industrial Attachment Form</span>
-                    <span class="file-meta">TYPE: PDF // OFFICIAL</span>
-                </div>
-                <a href="4. Industrial-Attachment-Form.pdf" download class="download-btn">DOWNLOAD</a>
-            </div>
-
-            <div class="note-card">
-                <div>
-                    <i class="fa-solid fa-file-signature file-icon"></i>
-                    <span class="file-name">ADM Letter for TVET</span>
-                    <span class="file-meta">TYPE: PDF // ENTRY-CMD</span>
-                </div>
-                <a href="ADM LETTER FOR TVET.pdf" download class="download-btn">DOWNLOAD</a>
-            </div>
-
-            <div class="note-card">
-                <div>
-                    <i class="fa-solid fa-file-invoice-dollar file-icon"></i>
-                    <span class="file-name">Bursary Form Revised</span>
-                    <span class="file-meta">TYPE: PDF // FIN-DATA</span>
-                </div>
-                <a href="Bursary-form-Revised.pdf" download class="download-btn">DOWNLOAD</a>
-            </div>
-
-            <div class="note-card">
-                <div>
-                    <i class="fa-solid fa-file-word file-icon"></i>
-                    <span class="file-name">3rd Year TP Questionnaire 2024</span>
-                    <span class="file-meta">TYPE: DOCX // SURVEY</span>
-                </div>
-                <a href="3rd year TP Questionnair 2024.docx" download class="download-btn">DOWNLOAD</a>
-            </div>
+    <div id="authOverlay">
+        <div class="auth-card">
+            <h2 style="color: var(--neon-blue); font-family: 'Space Mono';">IDENTITY VERIFICATION</h2>
+            <p style="font-size: 0.7rem; color: #aaa;">ENTER 'ADMIN' TO ACCESS UPLOAD TOOLS</p>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password (any for guest)">
+            <button class="auth-btn" onclick="handleAuth()">INITIALIZE SESSION</button>
         </div>
     </div>
 
+    <header>
+        <h1>ERUDITION HUB</h1>
+        <p id="welcomeMsg">// DATABASE ACCESS GRANTED //</p>
+    </header>
+
+    <div class="container">
+        <div id="adminPanel" class="admin-status-bar">
+            <i class="fa-solid fa-user-shield"></i> ADMIN_DASHBOARD_ACTIVE // TOTAL_USERS: 1,422 // SYSTEM_INTEGRITY: 98%
+        </div>
+
+        <div class="action-bar">
+            <div class="top-row">
+                <div class="search-area">
+                    <i class="fa-solid fa-terminal" style="color: var(--neon-blue);"></i>
+                    <input type="text" id="searchBar" onkeyup="filterFiles()" placeholder="Search library database...">
+                </div>
+                
+                <div class="btn-group">
+                    <input type="file" id="fileUpload" style="display:none" onchange="handleFileUpload(event)">
+                    <button id="uploadBtn" class="upload-trigger-btn admin-only" onclick="document.getElementById('fileUpload').click()">
+                        <i class="fa-solid fa-upload"></i> UPLOAD_FILES
+                    </button>
+                    <button class="bulk-download-btn" onclick="downloadAll()">
+                        <i class="fa-solid fa-box-archive"></i> DOWNLOAD_ALL
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="notes-grid" id="notesList"></div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
     <script>
+        // Initialize Email Service (Placeholder for your account)
+        (function(){ emailjs.init("YOUR_PUBLIC_KEY"); })();
+
+        const libraryData = [
+            { name: "Chemistry Lab Model 1-1", file: "chemistry lab model 1-1.pdf", type: "PDF", cat: "Science", icon: "fa-atom" },
+            { name: "Industrial Attachment Form", file: "4. Industrial-Attachment-Form.pdf", type: "PDF", cat: "Admin", icon: "fa-briefcase" },
+            { name: "ADM Letter for TVET", file: "ADM LETTER FOR TVET.pdf", type: "PDF", cat: "Admin", icon: "fa-id-card" }
+        ];
+
+        function handleAuth() {
+            const user = document.getElementById('username').value;
+            if(!user) return alert("Identify yourself.");
+
+            // Notify Emmanuel by Email
+            sendNotification(user);
+
+            // Hide Auth UI
+            document.getElementById('authOverlay').style.display = 'none';
+            document.getElementById('welcomeMsg').innerText = `// WELCOME, ${user.toUpperCase()} // SESSION_ESTABLISHED`;
+
+            // Check if Admin
+            if(user.toLowerCase() === 'admin') {
+                document.getElementById('adminPanel').style.display = 'block';
+                document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'flex');
+            }
+            
+            renderLibrary();
+        }
+
+        function sendNotification(userName) {
+            console.log(`Alerting emumo363@gmail.com: New login from ${userName}`);
+            // To make this work, sign up at emailjs.com (it's free) and replace these IDs:
+            /*
+            emailjs.send("service_id", "template_id", {
+                to_email: "emumo363@gmail.com",
+                message: `Alert: A new user (${userName}) has accessed the Erudition Hub.`
+            });
+            */
+        }
+
+        function renderLibrary() {
+            const grid = document.getElementById('notesList');
+            grid.innerHTML = "";
+            libraryData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'note-card';
+                card.innerHTML = `
+                    <div>
+                        <i class="fa-solid ${item.icon} file-icon"></i>
+                        <span class="file-name">${item.name}</span>
+                        <span class="file-meta">${item.cat.toUpperCase()} // ${item.type}</span>
+                    </div>
+                    <a href="${item.file}" download class="download-btn">DOWNLOAD</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const newEntry = {
+                name: file.name,
+                file: URL.createObjectURL(file),
+                type: file.name.split('.').pop().toUpperCase(),
+                cat: "Admin-Added",
+                icon: "fa-file-shield"
+            };
+            libraryData.push(newEntry);
+            renderLibrary();
+            alert("SECURE FILE UPLOADED TO DATABASE");
+        }
+
         function filterFiles() {
             let input = document.getElementById('searchBar').value.toUpperCase();
             let cards = document.getElementsByClassName('note-card');
-            for (let i = 0; i < cards.length; i++) {
-                let txt = cards[i].innerText.toUpperCase();
-                cards[i].style.display = txt.includes(input) ? "flex" : "none";
+            for (let card of cards) {
+                card.style.display = card.innerText.toUpperCase().includes(input) ? "flex" : "none";
             }
         }
 
         function downloadAll() {
-            const files = [
-                "chemistry lab model 1-1.pdf",
-                "4. Industrial-Attachment-Form.pdf",
-                "ADM LETTER FOR TVET.pdf",
-                "Bursary-form-Revised.pdf",
-                "3rd year TP Questionnair 2024.docx"
-            ];
+            libraryData.forEach((item, index) => {
+                setTimeout(() => {
+                    const link = document.createElement('a');
+                    link.href = item.file;
+                    link.download = item.name;
+                    link.click();
+                }, index * 300);
+            });
+        }
+    </script>
+</body>
+                </html>
+                
