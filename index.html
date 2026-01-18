@@ -89,7 +89,7 @@
 
     <div class="container">
         <div id="adminPanel" class="admin-status-bar">
-            <i class="fa-solid fa-user-shield"></i> ADMIN_DASHBOARD_ACTIVE // TOTAL_USERS: 1,422 // SYSTEM_INTEGRITY: 98%
+            <i class="fa-solid fa-user-shield"></i> ADMIN_DASHBOARD_ACTIVE // TOTAL_FILES: 18 // SYSTEM_INTEGRITY: 100%
         </div>
 
         <div class="action-bar">
@@ -119,25 +119,37 @@
     <script>
         (function(){ emailjs.init("YOUR_PUBLIC_KEY"); })();
 
+        // UPDATED LIBRARY DATA WITH FILES FROM GITHUB REPOSITORY IMAGES
         const libraryData = [
             { name: "Chemistry Lab Model 1-1", file: "chemistry lab model 1-1.pdf", type: "PDF", cat: "Science", icon: "fa-atom" },
+            { name: "Marks Query Form", file: "2. Marks-Query-Form.pdf", type: "PDF", cat: "Admin", icon: "fa-file-signature" },
+            { name: "Special & Supplementary Form", file: "3. SPECIAL AND SUPPLEMENTARY-FOR....pdf", type: "PDF", cat: "Exams", icon: "fa-file-circle-exclamation" },
+            { name: "3rd Year TP Questionnaire", file: "3rd year TP Questionnair 2024.docx", type: "DOCX", cat: "Education", icon: "fa-clipboard-question" },
             { name: "Industrial Attachment Form", file: "4. Industrial-Attachment-Form.pdf", type: "PDF", cat: "Admin", icon: "fa-briefcase" },
-            { name: "ADM Letter for TVET", file: "ADM LETTER FOR TVET.pdf", type: "PDF", cat: "Admin", icon: "fa-id-card" }
+            { name: "Internship Form 3", file: "5. Internship-Form-3.pdf", type: "PDF", cat: "Admin", icon: "fa-user-tie" },
+            { name: "ADM Letter for TVET", file: "ADM LETTER FOR TVET.pdf", type: "PDF", cat: "Admin", icon: "fa-id-card" },
+            { name: "Admission Letter", file: "ADMMISSION_LETER_PDF[1].pdf", type: "PDF", cat: "Admin", icon: "fa-envelope-open-text" },
+            { name: "Alumni Registration Form", file: "Alumni-Registration-form.pdf", type: "PDF", cat: "Alumni", icon: "fa-user-graduate" },
+            { name: "Bursary Form (Revised)", file: "Bursary-form-Revised.pdf", type: "PDF", cat: "Finance", icon: "fa-hand-holding-dollar" },
+            { name: "Clearance Form", file: "CLEARANCE FORM.pdf", type: "PDF", cat: "Admin", icon: "fa-check-double" },
+            { name: "TP Forms (Complete)", file: "COMPLETE TP FORMS for sharing (3).docx", type: "DOCX", cat: "Education", icon: "fa-folder-tree" },
+            { name: "Completion Letter (Edu)", file: "COMPLETION_LETTER_-_EDUCATION.docx", type: "DOCX", cat: "Education", icon: "fa-certificate" },
+            { name: "Completion Letter (Hum)", file: "COMPLETION_LETTER_-_HUMANITIES.docx", type: "DOCX", cat: "Humanities", icon: "fa-certificate" },
+            { name: "Chancellors Scholarship", file: "Chancellors-Scholarship-Application-For....pdf", type: "PDF", cat: "Finance", icon: "fa-award" },
+            { name: "Deferment Form", file: "DEFERMENT-FORM-1.pdf", type: "PDF", cat: "Admin", icon: "fa-clock" },
+            { name: "Gowns Issuance Form", file: "Gowns-issuance-form.docx", type: "DOCX", cat: "Graduation", icon: "fa-user-graduate" },
+            { name: "Fee Structure (B.Ed Arts)", file: "Fee Structure Bachelor of Education Arts...", type: "PDF", cat: "Finance", icon: "fa-money-bill-wave" }
         ];
 
         function handleAuth() {
             const email = document.getElementById('userEmail').value.trim().toLowerCase();
-            const adminEmail = "emumo363@gmail.com"; // YOUR ADMIN EMAIL
+            const adminEmail = "emumo363@gmail.com"; 
 
             if(!email || !email.includes('@')) return alert("Enter a valid email address.");
 
-            // Notify Emmanuel by Email
             sendNotification(email);
-
-            // Hide Auth UI
             document.getElementById('authOverlay').style.display = 'none';
 
-            // Check if user matches your specific admin email
             if(email === adminEmail) {
                 document.getElementById('welcomeMsg').innerText = `// WELCOME, MASTER KING // SESSION_ADMIN_LEVEL`;
                 document.getElementById('adminPanel').style.display = 'block';
@@ -208,5 +220,4 @@
         }
     </script>
 </body>
-            </html>
-            
+</html>
